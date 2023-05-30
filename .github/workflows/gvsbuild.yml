@@ -29,9 +29,9 @@ jobs:
       shell: pwsh
       run: choco install msys2
     
-    - name: Install visualstudio2022
-      shell: pwsh
-      run: choco install visualstudio2022-workload-vctools
+#     - name: Install visualstudio2022
+#       shell: pwsh
+#       run: choco install visualstudio2022-workload-vctools
     
     - name: Install pipx and gvsbuild
       shell: pwsh
