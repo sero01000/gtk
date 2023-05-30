@@ -1,0 +1,48 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+#     - name: configure
+#       run: ./configure
+#     - name: make
+#       run: make
+#     - name: make check
+#       run: make check
+#     - name: make distcheck
+#       run: make distcheck
+    - name: install pipx and gvsbuild
+      shell: pwsh
+      run: |
+        python -m pip install --user pipx
+        python -m pipx ensurepath
+        pipx install gvsbuild
+        
+#Alternatively, you can also use git to clone the repository and install it. Open a new regular user PowerShell terminal and execute:
+#     - name: install gvsbuild
+#       shell: pwsh
+#       run: |
+#         mkdir C:\gtk-build\github
+#         cd C:\gtk-build\github
+#         git clone https://github.com/wingtk/gvsbuild.git
+#         cd C:\gtk-build\github\gvsbuild
+#         python -m venv .venv
+#         .\.venv\Scripts\activate.ps1
+#         pip install .
+    - name: Build GTK
+      shell: pwsh
+      run: |
+        gvsbuild build gtk4
+
